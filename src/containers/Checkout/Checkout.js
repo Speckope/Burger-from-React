@@ -7,10 +7,10 @@ import ContactData from './ContactData/ContactData';
 class Checkout extends Component {
   state = {
     ingredients: null,
-    price: 0,
+    totalPrice: 0,
   };
 
-  componentDidMount() {
+  componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
     let price = 0;
@@ -46,7 +46,15 @@ class Checkout extends Component {
         />
         <Route
           path={this.props.match.path + '/contact-data'}
-          render={() => <ContactData ingredients={this.state.ingredients} />}
+          render={(props) => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              price={this.state.totalPrice}
+              // we pass props here to have accesss to router props in ContactData!
+              // we could have also wrapped contactData in withRouter!
+              {...props}
+            />
+          )}
         />
       </div>
     );
