@@ -6,7 +6,15 @@ const initialState = {
   userId: null,
   token: null,
   loading: false,
+  authRedirectPath: '/',
 };
+
+// componentDIdMount in Auth container
+// add buildingBurger
+// add authRedirectPath
+// add dispatch onSetAuthRedirectPath
+// bind rediPAth to authRedirect
+// in compdidmo if we r not building burger and authRedPath isnt '/' call setAuthRedOa to '/'
 
 const authStart = (state, action) => {
   return updateObject(state, { loading: true, error: null });
@@ -18,6 +26,7 @@ const authSuccess = (state, action) => {
     userId: action.userId,
     token: action.idToken,
     error: null,
+    authRedirectPath: '/',
   });
 };
 
@@ -27,6 +36,10 @@ const authFail = (state, action) => {
 
 const authLogout = (state, action) => {
   return updateObject(state, { token: null, userId: null });
+};
+
+const setAuthRedirectPath = (state, action) => {
+  return updateObject(state, { authRedirectPath: action.path });
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +52,8 @@ const reducer = (state = initialState, action) => {
       return authSuccess(state, action);
     case actions.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actions.SET_AUTH_REDIRECT:
+      return setAuthRedirectPath(state, action);
     default:
       return state;
   }
