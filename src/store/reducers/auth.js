@@ -9,13 +9,6 @@ const initialState = {
   authRedirectPath: '/',
 };
 
-// componentDIdMount in Auth container
-// add buildingBurger
-// add authRedirectPath
-// add dispatch onSetAuthRedirectPath
-// bind rediPAth to authRedirect
-// in compdidmo if we r not building burger and authRedPath isnt '/' call setAuthRedOa to '/'
-
 const authStart = (state, action) => {
   return updateObject(state, { loading: true, error: null });
 };
